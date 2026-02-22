@@ -36,9 +36,3 @@ This project can recover all datas from multiple Spotify playlists and use them 
 ## Customization
 - Edit `hitster_card.typ` to change card layout or style.
 - Add new playlists or CSVs for different decks.
-
-## License
-MIT License
-
----
-Created by Mours. Powered by Spotipy, Plotly, Typst, and Pandas.
