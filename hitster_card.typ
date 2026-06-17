@@ -1,54 +1,83 @@
 #import "@preview/zebra:0.1.0": qrcode
 
 #set page(height: 5cm, width: 5cm, margin: 3mm)
-#set text(font: "Orkney", size: 12pt)
+#set text(font: "Helvetica Neue", size: 12pt)
 
 #let hitster_card(
-  spotify_link,
-  track_year,
-  track_title,
-  artists,
-  friend_who_add_it
+  back_link,
+  middle_txt,
+  top_txt,
+  bot_txt,
+  right_txt,
+  left_txt,
 ) = {
   align(center + horizon)[
-    #qrcode(spotify_link, height: 3cm)
+    #qrcode(back_link, height: 3cm)
   ]
 
   pagebreak()
 
-  align(center + top)[
-    #text(weight: 300)[#track_title]
-  ]
+  if top_txt != none {
+    align(center + top)[
+      #text(weight: 600)[
+        #top_txt
+      ]
+    ]
+  }
 
-  place(center + horizon)[
-    #text(weight: 700, size: 28pt)[#track_year]
-  ]
+  if middle_txt != none {
+    place(center + horizon)[
+      #text(font: "Gotham", weight: 500, size: 32pt)[
+        #middle_txt
+      ]
+    ]
+  }
 
-  align(center + bottom)[
-    #text(weight: 400)[#artists]
-  ]
+  if bot_txt != none {
+    align(center + bottom)[
+      #text(weight: 400)[
+        #bot_txt
+      ]
+    ]
+  }
 
-  if friend_who_add_it != none {
-    place(right + horizon, dx: 7mm)[#rotate(-90deg)[
-      _#text(fill: luma(60%), size: 9pt, weight: 300)[#friend_who_add_it]_
-    ]]
+  if right_txt != none {
+    text(size: 9pt, weight: 300, fill: luma(66%))[
+      #place(center + horizon, dx: 2.2cm)[
+        #rotate(-90deg)[
+          _ #right_txt _
+        ]
+      ]
+    ]
+  }
+
+  if left_txt != none {
+    text(size: 9pt, weight: 300, fill: luma(66%))[
+      #place(center + horizon, dx: -2.2cm)[
+        #rotate(-90deg)[
+          _ #left_txt _
+        ]
+      ]
+    ]
   }
 }
 
 #let hitster_deck(
   list_links,
-  list_years,
-  list_titles,
-  list_artists,
-  list_friends
+  list_middle,
+  list_top,
+  list_bot,
+  list_right,
+  list_left,
 ) = {
   for i in range(list_links.len()) {
     hitster_card(
       list_links.at(i),
-      list_years.at(i),
-      list_titles.at(i),
-      list_artists.at(i),
-      list_friends.at(i),
+      list_middle.at(i),
+      list_top.at(i),
+      list_bot.at(i),
+      list_right.at(i),
+      list_left.at(i),
     )
   }
 }
@@ -59,7 +88,8 @@
     sys.inputs.at("year_" + str(input_idx), default: "2026"),
     sys.inputs.at("name_" + str(input_idx), default: "Amazing Track"),
     sys.inputs.at("artists_" + str(input_idx), default: "Great Artist"),
-    sys.inputs.at("added_by_name_" + str(input_idx), default: "Friend"),
+    sys.inputs.at("added_by_name_" + str(input_idx), default: "Added by: Friend"),
+    sys.inputs.at("left_txt_" + str(input_idx), default: "Hitster Example"),
   )
 }
 
@@ -68,13 +98,14 @@
 #let nb_tracks = int(sys.inputs.at("nb_tracks", default: 1))
 
 #for i in range(nb_tracks) {
-  let (url, year, name, artists, added_by_name) = get_input_list(i)
+  let (url, year, name, artists, added_by_name, left_txt) = get_input_list(i)
     hitster_card(
       url,
       year,
       name,
       artists,
       added_by_name,
+      left_txt
     )
     if i < nb_tracks - 1 {
       pagebreak()
