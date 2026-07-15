@@ -2,18 +2,10 @@
 
 This project can recover all datas from multiple Spotify playlists and use them to generate custom Hitster cards.
 
-## Features
-- Fetches playlist data from Spotify using Spotipy
-- Cleans and processes track and artist information
-- Saves and loads tracks information as CSV files
-- Analyzes playlist by year and visualizes with Plotly
-- Generates printable Hitster cards using Typst template
-
-## Project Structure
-- `main.py`: Entry point. Loads playlist or CSV, analyzes, and generates hitster deck.
-- `hitster_deck.py`: Deck logic, CSV handling, analysis, Typst card generation.
-- `spotify_data.py`: Spotify API integration, playlist fetching, dataframe creation.
-- `hitster_card.typ`: Typst template for card layout.
+<p align="center">
+  <img src="example_front.png" alt="Hitster card front" width="320" />
+  <img src="example_back.png"  alt="Hitster card back"  width="320" />
+</p>
 
 ## Usage
 1. Set up a `.env` file with your Spotify API credentials:
@@ -21,17 +13,26 @@ This project can recover all datas from multiple Spotify playlists and use them 
    CLIENT_ID=your_spotify_client_id
    CLIENT_SECRET=your_spotify_client_secret
    ```
+   OR
+   update the `get_spotify_id` function with your credentials.
 2. Install dependencies:
    ```bash
    pip install pandas plotly spotipy tqdm python-dotenv typst
    ```
-3. Run the main script
+3. Run the main script with the correct `PLAYLIST` URI.
 
 ## Output
 - CSV data with columns: top, bottom, center, right, left, qrcode
-- Analysis PDF: Year distribution of tracks
 - Hitster Deck PDF: Printable cards for each track
 
-## Customization
-- Edit `hitster_card.typ` to change card layout or style.
-- Add new playlists or CSVs for different decks.
+## Fonts
+- Gotham (year)
+- Georgia (title)
+- Helvetica Neue (artists)
+- Calibri (all others)
+
+## Project Structure
+- `main.py`: Entry point. Loads playlist or CSV, analyzes, and generates hitster deck.
+- `hitster_deck.py`: Deck logic, CSV handling, analysis, Typst card generation.
+- `spotify_data.py`: Spotify API integration, playlist fetching, dataframe creation.
+- `hitster_card.typ`: Typst template for hitster card layout.

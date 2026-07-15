@@ -1,7 +1,7 @@
 #import "@preview/zebra:0.1.0": qrcode
 
 #set page(height: 5cm, width: 5cm, margin: 3mm)
-#set text(font: "Helvetica Neue", size: 12pt)
+#set text(font: "Calibri", size: 12pt)
 
 #let hitster_card(
   back_link,
@@ -19,7 +19,7 @@
 
   if top_txt != none {
     align(center + top)[
-      #text(weight: 600, style: "italic")[
+      #text(font: "Georgia", weight: 500, style: "italic")[
         #top_txt
       ]
     ]
@@ -35,7 +35,7 @@
 
   if bot_txt != none {
     align(center + bottom)[
-      #text(weight: 400)[
+      #text(font: "Helvetica Neue", weight: 400)[
         #bot_txt
       ]
     ]
