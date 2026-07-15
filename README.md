@@ -12,7 +12,7 @@ This project can recover all datas from multiple Spotify playlists and use them 
 ## Project Structure
 - `main.py`: Entry point. Loads playlist or CSV, analyzes, and generates hitster deck.
 - `hitster_deck.py`: Deck logic, CSV handling, analysis, Typst card generation.
-- `spotify_data.py`: Spotify API integration, playlist fetching.
+- `spotify_data.py`: Spotify API integration, playlist fetching, dataframe creation.
 - `hitster_card.typ`: Typst template for card layout.
 
 ## Usage
@@ -26,10 +26,9 @@ This project can recover all datas from multiple Spotify playlists and use them 
    pip install pandas plotly spotipy tqdm python-dotenv typst
    ```
 3. Run the main script
-   - By default, loads `parfaet.csv` and generates analysis and cards.
-   - To fetch a new deck from Spotify, update the playlist ID in `main.py`.
 
 ## Output
+- CSV data with columns: top, bottom, center, right, left, qrcode
 - Analysis PDF: Year distribution of tracks
 - Hitster Deck PDF: Printable cards for each track
 

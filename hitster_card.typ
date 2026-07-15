@@ -19,7 +19,7 @@
 
   if top_txt != none {
     align(center + top)[
-      #text(weight: 600)[
+      #text(weight: 600, style: "italic")[
         #top_txt
       ]
     ]
@@ -83,14 +83,25 @@
 }
 
 #let get_input_list(input_idx) = {
-  return (
-    sys.inputs.at("url_" + str(input_idx), default: "https://github.com/xmousset"),
-    sys.inputs.at("year_" + str(input_idx), default: "2026"),
-    sys.inputs.at("name_" + str(input_idx), default: "Amazing Track"),
-    sys.inputs.at("artists_" + str(input_idx), default: "Great Artist"),
-    sys.inputs.at("added_by_name_" + str(input_idx), default: "Added by: Friend"),
-    sys.inputs.at("left_txt_" + str(input_idx), default: "Hitster Example"),
+  let result = (
+    sys.inputs.at("qrcode_" + str(input_idx), default: none),
+    sys.inputs.at("center_" + str(input_idx), default: none),
+    sys.inputs.at("top_" + str(input_idx), default: none),
+    sys.inputs.at("bot_" + str(input_idx), default: none),
+    sys.inputs.at("right_" + str(input_idx), default: none),
+    sys.inputs.at("left_" + str(input_idx), default: none),
   )
+  if result.all(it => it == none) {
+    result = (
+      "https://github.com/xmousset",
+      "2026",
+      "Amazing Track",
+      "Great Artist",
+      "Added by this Friend",
+      "Hitster Example"
+    )
+  }
+  return result
 }
 
 // Main loop

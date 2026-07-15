@@ -58,20 +58,22 @@ class SpotifyAPI:
                 else:
                     added_by_name = user["display_name"]
 
-                year = int(track["album"]["release_date"][:4])
+                if "release_date" not in track["album"]:
+                    print(f"Release date error: {track['name']}")
+                    year = None
+                else:
+                    year = int(track["album"]["release_date"][:4])
 
                 songs.append(
                     {
-                        "name": track["name"],
-                        "artists": [
+                        "qrcode": track["external_urls"]["spotify"],
+                        "center": year,
+                        "top": track["name"],
+                        "bot": ", ".join(
                             artist["name"] for artist in track["artists"]
-                        ],
-                        "year": year,
-                        "release_date": track["album"]["release_date"],
-                        "url": track["external_urls"]["spotify"],
-                        "id": track["id"],
-                        "added_by_id": added_by_id,
-                        "added_by_name": added_by_name,
+                        ),
+                        "left": None,
+                        "right": added_by_name,
                     }
                 )
                 pbar.update(1)
